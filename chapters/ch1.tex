@@ -1,0 +1,130 @@
+\chapter{The Real Numbers}
+\section{Some Preliminaries}
+Basic familiarity with the lanaguage of set theory is assumed.
+\subsection*{Functions}
+\begin{definition}[Function, Domain, Codomain]
+    Let $A$ and $B$ be sets. Then, a \textbf{function} $f$ from $A$ to $B$ maps each element $a\in A$ and associates it with a single element $f(a) \in B$. The set $A$ is known as the \textbf{domain} of $f$ and $B$ is known as the \textbf{codomain} of $f$. 
+\end{definition}
+\begin{definition}[Range]
+    Let $A$ and $B$ be sets, and let $f: A\to B$ be a function. The \textbf{range} of $f$ is the set of all elements mapped to by at least one element of $A$. That is, the range is the set given by $\{ f(a)\in B \, : \, a\in A \}$.
+\end{definition}
+\begin{example}[The Unruly Function]
+    The \textit{unruly function}, or the \textit{Dirichlet function}, is the function $g: \R \to \R$ described by
+    \[ g(x) = \begin{cases}
+        1 & x\in\Q \\
+        0 & x\not\in\Q
+    \end{cases}\]
+    The domain of and codomain $g$ is all of $\R$ and the range of $g$ is the set $\{0, 1\}$. This type of function does not behave nearly as nicely as the traditional idea of a function taught in high school, but it certainly fits our definition of function. 
+\end{example}
+\begin{example}[Triangle Inequality]
+    The \textbf{absolute value} function is so important that it merits its own notation $|x|$ instead of the traditional $f(x)$. It is defined with
+    \[ |x| = \begin{cases}
+        x & x \geq  0 \\
+        -x & x < 0
+    \end{cases}\]
+    It is easy to show that $\abs{ab} = \abs{a}\, \abs{b}$ and $\abs{a+b} \leq \abs{a} + \abs{b}$ by looking at the cases when $a,b$ and $a+b$ are positive and negative. The second property, known as the \textbf{triangle inequality}, turns out to be critically important. We will frequently employ it in the following way. Given $a,b,c\in\R$, we certainly have
+    \[ \abs{a-b} = \abs{(a-c) + (c-b)} \]
+    Which, by the triangle inequality, tells us
+    \[ \abs{a-b} \leq \abs{a-c} + \abs{c-b} \]
+    We can interpret the quantity $\abs{x-y}$ as the distance between two points $x$ and $y$ on the number line, so the triangle inequality geometrically says that the distance between two points $a$ and $b$ is less than or equal to the distance between $a$ and some intermediate point $c$, plus the distance between $c$ and $b$. 
+
+    This generalizes nicely to $\R^n$, where the geometric intuition behind the name may be more apparent.
+\end{example}
+\subsection*{Logic and Proofs}
+Writing rigorous mathematical proofs is a skill that takes quite a bit of practice and dedication to learn, and it is best learned by doing. 
+\begin{theorem}
+    Two real numbers $a$ and $b$ are equal if and only if for every real number $\epsilon > 0$, $\abs{a-b} < \epsilon$. 
+\end{theorem}
+\begin{proof}
+    There are two key parts to this proof. First, there is the statement
+    \[ \text{If $a$ and $b$ are equal, then for every $\epsilon > 0$, $\abs{a-b}<\epsilon$} \]
+    and then there is
+    \[ \text{If for every $\epsilon > 0$, $\abs{a-b}< \epsilon$, then $a$ and $b$ are equal} \]
+    These two statements may seem quite similar at first, but they have the critical property that they are in the opposite direction. Proving an ``if and only if" statement involves proving both the forward direction and the reverse direction. 
+
+    $(\implies)$ Starting with the forward direction, there isn't much to say. Assuming $a=b$, $\abs{a-b} = 0$ which is surely less than any positive real number $\epsilon$. 
+
+    $(\impliedby)$ For the reverse direction, suppose that for every $\epsilon > 0$, $\abs{a-b}< \epsilon$. Aiming for a contradiction, we assume $a\neq b$. Therefore, $\abs{a-b} = \epsilon_0$ for some real number $\epsilon_0>0$. However, if we choose $\epsilon = \epsilon_0$, then we get two contradictory statements,
+    \[ \abs{a-b} = \epsilon_0 \quad\text{and}\quad \abs{a-b} < \epsilon_0\]
+    Therefore, $a\neq b$ leads to a contradiction and so $a=b$ must be true. 
+\end{proof}
+\subsection*{Induction}
+One final tool of the trade is the principle of mathematical induction. The basic argument behind induction is that if $S$ is some subset of $\N$ with the properties
+\[ 1\in S \quad\text{and}\quad  (n \in S)\implies (n+1\in S)\]
+then we must have $S = \N$. This is an extremely powerful tool that we will now demonstrate.
+\begin{example}
+    Let $x_1 = 1$ and for each $n\in \N$ define
+    \[ x_{n+1} = (1/2)x_n + 1\]
+    We wish to prove that $x_n \leq x_{n+1}$ for every $n\in \N$, which we will do with induction.
+
+    The general form of an induction proof is to show that the proposition is true for some \textbf{base case} (usually $n=1$), and then to show that if the proposition is true for some $n$, then it must also be true for $n+1$. The second part is known as the \textbf{inductive step}. 
+
+    Starting with the base case, we have $x_1 = 1$ and $x_2 = (1/2)x_1 + 1 = 3/2$. Clearly, $x_1 \leq x_2$, showing the base case.
+
+    For the inductive step, suppose $x_n \leq x_{n+1}$. We can divide by two on both sides and then add one to obtain $(1/2)x_n + 1 \leq (1/2)x_{n+1} + 1$. However, $(1/2)x_n + 1$ is just $x_{n+1}$ and $(1/2)x_{n+1} + 1$ is just $x_{n+2}$, so we have
+    \[ x_n \leq x_{n+1} \implies x_{n+1} \leq x_{n+2} \]
+    completing the inductive step, and completing the proof. 
+\end{example}
+\section{The Axiom of Completeness}
+In this section we aim to give a definition for the real numbers $\R$. This may seem like an easy task but it ends up being surprisingly complicated. 
+\subsection*{An Initial Definition}
+We will come to our definition by describing what properties we wish for $\R$ to have, and then designing it around those properties. A few properties that seem natural are
+\begin{enumerate}
+    \item $\R$ contains $\Q$.
+    \item Every nonzero element of $\R$ has an additive and multiplicative inverse.
+    \item $\R$ is a field (meaning that basic properties of associativity, distributivity, and commutativity hold)
+    \item Properties of ordering on $\Q$ hold in $\R$. For example, we must have $[(a < b)\land (c>0)] \implies [ac < bc]$.
+\end{enumerate}
+This leads us to one of the most important results in all of real analysis:
+
+\textbf{The Axiom of Completeness:} Every nonempty set of real numbers that is bounded above has a least upper bound.
+
+But what is a least upper bound? What does it mean to be bounded above? We will explore this now.
+\subsection*{Least Upper Bounds and Greatest Lower Bounds}
+First, some preliminary definitions will be needed.
+\begin{definition}[Bounded Above, Bounded Below]
+    A set $A\subseteq \R$ is \textbf{bounded above} if there exists some $b\in \R$ such that $a \leq b$ for all $a\in A$. The number $b$ is called an \textbf{upper bound} for $A$.
+
+    Similarly, if there is some $l\in \R$ such that $a \geq l$ for all $a\in A$, then $A$ is \textbf{bounded below} and $l$ is a \textbf{lower bound} for $A$. 
+\end{definition}
+\begin{definition}[Least Upper Bound, Supremum]
+    A real number $s$ is the unique \textbf{least upper bound} for $A$ if it meets the following criteria:
+    \begin{enumerate}
+        \item $s$ is an upper bound for $A$.
+        \item if $b$ is any upper bound for $A$, then $s \leq b$.
+    \end{enumerate}
+    In this case, we call $s$ the \textbf{supremum} of $A$ and denote it $s = \sup A$. 
+\end{definition}
+We define the greatest lower bound, or \textbf{infimum} in a comparable way, and denote it $\inf A$. 
+\begin{example}
+    Let
+    \[ A = \left\{\frac{1}{n} \, : \, n\in\N \right\}\]
+    The set $A$ is bounded above and below, by the axiom of completeness. Several potential upper bounds include $3$, $2$, and $97$. Several potential lower bounds are $-1$, $-0.001$, and $-76$. For a least upper bound, we claim $\sup A = 1$. To prove the first property, that $1$ is an upper bound for $A$, we simply note that $1 \geq 1/n$ for all $n\in\N$. For the second property, suppose $b$ is an upper bound for $A$. Because $1\in A$, we must have $1 \leq b$, as desired.
+
+    We do not yet have the tools to prove this, but the natural-seeming result that $\inf A = 0$ also holds. 
+\end{example}
+An important outcome of the previous example is that the supremum and infimum of a set may or may not be elements of the set, which differentiates them from the concept of a set's maximum or minimum.
+
+\begin{definition}[Maximum, Minimum]
+    A real number $a_0$ is a \textbf{maximum} of a set $A\subseteq \R$ if $a_0\in A$ and $a_0 \geq a$ for all $a\in A$. Similarly, a real number $a_1$ is a \textbf{minimum} of $A$ if $a_1\in A$ and $a_1 \leq a$ for all $a\in A$. 
+\end{definition}
+As should be clear from the previous example, not all sets have a maximum or minimum. The set $A = \{1/n: n\in \N\}$ has no minimum because $0\not\in A$ and every positive number has an element of $A$ that is smaller than it. 
+
+\begin{example}
+    Let $A\subseteq \R$ be nonempty and bounded above, and let $c\in \R$. Define the set $c + A$ by
+    \[ c+ A = \{ c + a \, : a\in A \} \]
+    Then, $\sup(c+A) = c +\sup A$. 
+
+    To prove this, we will focus on each part of the definition of the supremum separately. First, we clearly have $\sup A \geq a$ for all $a\in A$, which implies $c + \sup A \leq a + c$ for all $A \in a$, so $c + \sup A$ is an upper bound for $c + A$. 
+
+    To show that $c + \sup A$ is the \textit{least} upper bound, suppose $s$ is an upper bound of $c+ A$. This implies that for all $a\in A$, $s \geq a + c$, or $s - c \geq a$, implying that $s-c$ is an upper bound for $A$. Because $\sup A$ is the least upper bound, we have $s-c \geq \sup A$, or $s \geq c + \sup A$, completing the proof.
+\end{example}
+There is an equivalent and useful way to categorize the supremum of a set.
+\begin{lemma}
+    Let $s\in\R$ be an upper bound for a set $A\subseteq \R$. Then, $s=\sup A$ if and only if for every $\epsilon > 0$, there exists an element $a\in A$ such that $s-\epsilon < a$. 
+\end{lemma}
+\begin{proof}
+    For the forward direction, assume $s=\sup A$ and consider $s-\epsilon$ where $\epsilon > 0$ is arbitrary. Because $s-\epsilon < s$, it is not an upper bound for $A$. Therefore, there is some element $a\in A$ with $a > s-\epsilon$, completing the proof in one direction.
+    
+    For the reverse direction, assume that $s$ is an upper bound for $A$ with the condition that for every $\epsilon > 0$, there is some $a\in A$ with $s-\epsilon < a$. Then, for any $b\in \R$ with $b < s$, we must have $b\in A$ (by setting $\epsilon = s - b$). Therefore, no number less than $s$ is an upper bound for $A$, completing the proof.   
+\end{proof}
